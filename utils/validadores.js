@@ -3,12 +3,12 @@ const validarNome = (nome) => {
 }
 
 const validarEmail = (email) => {
-    const emailStr = email?.toSting();
+    const emailStr = email?.toString();
     return emailStr.length >= 5 && emailStr.includes('@') && emailStr.includes('.');
 }
 
 const validarSenha = (senha) => {
-    return senha?.toSting().length > 3;
+    return senha?.toString().length > 6;
 }
 
 const validarconfirmacaoSenha = (senha, confirmacao) => {
