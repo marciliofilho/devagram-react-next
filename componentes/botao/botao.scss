@@ -18,11 +18,9 @@
     &.primaria {
         @include botaoPrimario;
 
-        /* Hover desativado
         &:hover {
             @include botaoInvertido;
         }
-        */
     }
 
     &.invertido {

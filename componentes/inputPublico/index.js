@@ -14,12 +14,12 @@ export default function InputPublico({
             <div className="inputPublico">
                 <Image
                     src={imagem}
-                    alt="Imagem do campo."
+                    alt="imagem do campo"
                     className="iconeInputPublico"
                     width={20}
                     height={20}
                 />
-
+                
                 <input
                     type={tipo}
                     placeholder={texto}
@@ -28,7 +28,7 @@ export default function InputPublico({
                 />
             </div>
 
-            {exibirMensagemValidacao && <p className="mensagemValidacao"> {mensagemValidacao}</p>}
+            {exibirMensagemValidacao && <p className="mensagemValidacao">{mensagemValidacao}</p>}
         </div>
     );
 }
