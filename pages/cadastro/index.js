@@ -3,18 +3,19 @@ import Image from "next/image";
 import Link from "next/link";
 import Botao from "../../componentes/botao";
 import InputPublico from "../../componentes/inputPublico";
-import UploadImagem from "../../componentes/uploadImagem/";
-import { validarEmail, validarSenha, validarNome, validarconfirmacaoSenha } from "../../utils/validadores";
+import UploadImagem from "../../componentes/uploadImagem";
+import { validarEmail, validarSenha, validarNome, validarConfirmacaoSenha } from "../../utils/validadores";
 import UsuarioService from "../../services/UsuarioService";
 
 import imagemLogo from "../../public/imagens/logo.svg";
-import imagemusuarioAtivo from "../../public/imagens/usuarioAtivo.svg";
+import imagemUsuarioAtivo from "../../public/imagens/usuarioAtivo.svg";
 import imagemEnvelope from "../../public/imagens/envelope.svg";
 import imagemChave from "../../public/imagens/chave.svg";
 import imagemAvatar from "../../public/imagens/avatar.svg";
+import imagemMostrarSenha from "../../public/imagens/mostrarSenha.svg";
+import { useRouter } from "next/router";
 
 const usuarioService = new UsuarioService();
-
 
 export default function Cadastro() {
     const [imagem, setImagem] = useState(null);
@@ -23,13 +24,14 @@ export default function Cadastro() {
     const [senha, setSenha] = useState("");
     const [confirmacaoSenha, setConfirmacaoSenha] = useState("");
     const [estaSubmetendo, setEstaSubmetendo] = useState(false);
+    const router = useRouter();
 
     const validarFormulario = () => {
         return (
             validarNome(nome)
             && validarEmail(email)
             && validarSenha(senha)
-            && validarconfirmacaoSenha(senha, confirmacaoSenha)
+            && validarConfirmacaoSenha(senha, confirmacaoSenha)
         );
     }
 
@@ -57,6 +59,7 @@ export default function Cadastro() {
                 senha
             });
 
+            router.push('/');
         } catch (error) {
             alert(
                 "Erro ao cadastrar usuario. " + error?.response?.data?.erro
@@ -65,7 +68,6 @@ export default function Cadastro() {
 
         setEstaSubmetendo(false);
     }
-
 
     return (
         <section className={`paginaCadastro paginaPublica`}>
@@ -87,7 +89,7 @@ export default function Cadastro() {
                     />
 
                     <InputPublico
-                        imagem={imagemusuarioAtivo}
+                        imagem={imagemUsuarioAtivo}
                         texto="Nome Completo"
                         tipo="text"
                         aoAlterarValor={e => setNome(e.target.value)}
@@ -112,7 +114,7 @@ export default function Cadastro() {
                         tipo="password"
                         aoAlterarValor={e => setSenha(e.target.value)}
                         valor={senha}
-                        mensagemValidacao="A senha precisa ter pelo menos 5 caracteres"
+                        mensagemValidacao="Precisa de pelo menos 3 caracteres"
                         exibirMensagemValidacao={senha && !validarSenha(senha)}
                     />
 
@@ -123,9 +125,8 @@ export default function Cadastro() {
                         aoAlterarValor={e => setConfirmacaoSenha(e.target.value)}
                         valor={confirmacaoSenha}
                         mensagemValidacao="As senhas precisam ser iguais"
-                        exibirMensagemValidacao={confirmacaoSenha && !validarconfirmacaoSenha(senha, confirmacaoSenha)}
+                        exibirMensagemValidacao={confirmacaoSenha && !validarConfirmacaoSenha(senha, confirmacaoSenha)}
                     />
-
 
                     <Botao
                         texto="Cadastrar"
@@ -135,11 +136,12 @@ export default function Cadastro() {
                 </form>
 
 
+
                 <div className="rodapePaginaPublica">
                     <p>Já possui uma conta?</p>
                     <Link href="/">Faça seu login agora!</Link>
                 </div>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 }

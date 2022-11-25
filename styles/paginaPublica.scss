@@ -59,6 +59,7 @@
             border: 1px solid $corPrimaria;
             border-radius: 26px;
             padding: 50px;
+
         }
 
         .btn {
@@ -77,6 +78,11 @@
         .inputPublico {
             input {
                 font-size: 16px;
+            }
+
+            .botaoVer {
+                margin: -55px 0 0 220px;
+                position: relative;
             }
         }
     }
